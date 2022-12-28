@@ -67,7 +67,7 @@ class _ListMahasiswaPageState extends State<ListMahasiswaPage> {
           return AlertDialog(
             title: const Text(
               'Apakah Anda yakin akan menghapus data ini ?',
-              style: TextStyle(color: Colors.green, fontSize: 20),
+              style: TextStyle(color: Colors.black, fontSize: 20),
             ),
             actions: [
               TextButton(
