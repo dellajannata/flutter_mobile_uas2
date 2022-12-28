@@ -16,7 +16,7 @@ class _EditMahasiswaState extends State<EditMahasiswa> {
   var _mahasiswaNamaController = TextEditingController();
   var _mahasiswaAlamatController = TextEditingController();
   var _mahasiswaNoTelpController = TextEditingController();
-  String? jk;
+  var _mahasiswaJkController = TextEditingController();
   bool _validateNim = false;
   bool _validateNama = false;
   bool _validateAlamat = false;
@@ -31,7 +31,7 @@ class _EditMahasiswaState extends State<EditMahasiswa> {
       _mahasiswaNamaController.text = widget.mahasiswa.nama ?? '';
       _mahasiswaAlamatController.text = widget.mahasiswa.alamat ?? '';
       _mahasiswaNoTelpController.text = widget.mahasiswa.notelp ?? '';
-      jk = widget.mahasiswa.jk ?? '';
+      _mahasiswaJkController.text = widget.mahasiswa.jk ?? '';
     });
     super.initState();
   }
@@ -65,8 +65,7 @@ class _EditMahasiswaState extends State<EditMahasiswa> {
                     border: const OutlineInputBorder(),
                     hintText: 'Masukkan NIM Anda',
                     labelText: 'NIM',
-                    errorText:
-                        _validateNim ? 'Name Value Can\'t Be Empty' : null,
+                    errorText: _validateNim ? 'NIM tidak boleh kosong' : null,
                   )),
               const SizedBox(
                 height: 20.0,
@@ -77,8 +76,7 @@ class _EditMahasiswaState extends State<EditMahasiswa> {
                     border: const OutlineInputBorder(),
                     hintText: 'Masukkan Nama Lengkap Anda',
                     labelText: 'Nama Lengkap',
-                    errorText:
-                        _validateNama ? 'Contact Value Can\'t Be Empty' : null,
+                    errorText: _validateNama ? 'Nama tidak boleh kosong' : null,
                   )),
               const SizedBox(
                 height: 20.0,
@@ -89,9 +87,8 @@ class _EditMahasiswaState extends State<EditMahasiswa> {
                     border: const OutlineInputBorder(),
                     hintText: 'Masukkan Alamat Anda',
                     labelText: 'Alamat',
-                    errorText: _validateAlamat
-                        ? 'Description Value Can\'t Be Empty'
-                        : null,
+                    errorText:
+                        _validateAlamat ? 'Alamat tidak boleh kosong' : null,
                   )),
               const SizedBox(
                 height: 20.0,
@@ -104,34 +101,28 @@ class _EditMahasiswaState extends State<EditMahasiswa> {
                     border: const OutlineInputBorder(),
                     hintText: 'Masukkan No.Telp Anda',
                     labelText: 'No.Telp',
-                    errorText: _validateNoTelp
-                        ? 'Description Value Can\'t Be Empty'
-                        : null,
+                    errorText:
+                        _validateNoTelp ? 'No.Telp tidak boleh kosong' : null,
                   )),
-              Padding(
-                padding: const EdgeInsets.only(
-                  top: 20,
-                ),
-                child: DropdownButton(
-                  isExpanded: true,
-                  underline: SizedBox(),
-                  hint: Text('Jenis Kelamin'),
-                  items: [
-                    DropdownMenuItem(
-                      child: Text('Laki - Laki'),
-                      value: "Laki - Laki",
-                    ),
-                    DropdownMenuItem(
-                      child: Text('Perempuan'),
-                      value: "Perempuan",
-                    ),
-                  ],
-                  onChanged: (value) {
-                    setState(() {
-                      jk = value.toString();
-                    });
-                  },
-                ),
+              DropdownButton(
+                isExpanded: true,
+                underline: SizedBox(),
+                hint: Text('Jenis Kelamin'),
+                items: [
+                  DropdownMenuItem(
+                    child: Text('Laki - Laki'),
+                    value: "Laki - Laki",
+                  ),
+                  DropdownMenuItem(
+                    child: Text('Perempuan'),
+                    value: "Perempuan",
+                  ),
+                ],
+                onChanged: (value) {
+                  setState(() {
+                    _mahasiswaJkController.text = value.toString();
+                  });
+                },
               ),
               const SizedBox(
                 height: 20.0,
@@ -157,21 +148,22 @@ class _EditMahasiswaState extends State<EditMahasiswa> {
                         _mahasiswaNoTelpController.text.isEmpty
                             ? _validateNoTelp = true
                             : _validateNoTelp = false;
-                        jk == null ? _validateJk = true : _validateJk = false;
+                        _mahasiswaJkController.text.isEmpty
+                            ? _validateJk = true
+                            : _validateJk = false;
                       });
                       if (_validateNim == false &&
                           _validateNama == false &&
                           _validateAlamat == false &&
-                          _validateJk == false &&
-                          _validateNoTelp == false) {
-                        // print('Data Berhasil Disimpan');
+                          _validateNoTelp == false &&
+                          _validateJk == false) {
                         var _mhs = Mahasiswa();
                         _mhs.id = widget.mahasiswa.id;
                         _mhs.nim = _mahasiswaNimController.text;
                         _mhs.nama = _mahasiswaNamaController.text;
                         _mhs.alamat = _mahasiswaAlamatController.text;
                         _mhs.notelp = _mahasiswaNoTelpController.text;
-                        _mhs.jk = jk;
+                        _mhs.jk = _mahasiswaJkController.text;
                         var result =
                             await _mahasiswaService.UpdateMahasiswa(_mhs);
                         Navigator.pop(context, result);
@@ -192,6 +184,7 @@ class _EditMahasiswaState extends State<EditMahasiswa> {
                         _mahasiswaNimController.text = '';
                         _mahasiswaAlamatController.text = '';
                         _mahasiswaNoTelpController.text = '';
+                        _mahasiswaJkController.text = '';
                       },
                       child: const Text('Clear Details'))
                 ],

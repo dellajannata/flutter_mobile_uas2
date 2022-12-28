@@ -15,7 +15,7 @@ class _formMhs extends State<formMhs> {
   var namaController = TextEditingController();
   var alamatController = TextEditingController();
   var noTelpController = TextEditingController();
-  String? jk;
+  var jkController = TextEditingController();
   bool _validateNim = false;
   bool _validateNama = false;
   bool _validateAlamat = false;
@@ -55,7 +55,7 @@ class _formMhs extends State<formMhs> {
               decoration: InputDecoration(
                   labelText: 'NIM',
                   hintText: 'Masukkan NIM Anda',
-                  errorText: _validateNim ? 'Value Can\'t Be Empty' : null,
+                  errorText: _validateNim ? 'NIM tidak boleh kosong' : null,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
                   )),
@@ -70,7 +70,7 @@ class _formMhs extends State<formMhs> {
               decoration: InputDecoration(
                   labelText: 'Nama',
                   hintText: 'Masukkan Nama Lengkap Anda',
-                  errorText: _validateNama ? 'Value Can\'t Be Empty' : null,
+                  errorText: _validateNama ? 'Nama tidak boleh kosong' : null,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
                   )),
@@ -86,7 +86,8 @@ class _formMhs extends State<formMhs> {
               decoration: InputDecoration(
                   labelText: 'Alamat',
                   hintText: 'Masukkan Alamat Anda',
-                  errorText: _validateAlamat ? 'Value Can\'t Be Empty' : null,
+                  errorText:
+                      _validateAlamat ? 'Alamat tidak boleh kosong' : null,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
                   )),
@@ -103,7 +104,8 @@ class _formMhs extends State<formMhs> {
               decoration: InputDecoration(
                   labelText: 'No.Telp',
                   hintText: 'Masukkan No.Telp Anda',
-                  errorText: _validateNoTelp ? 'Value Can\'t Be Empty' : null,
+                  errorText:
+                      _validateNoTelp ? 'No.Telp tidak boleh kosong' : null,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
                   )),
@@ -129,7 +131,7 @@ class _formMhs extends State<formMhs> {
               ],
               onChanged: (value) {
                 setState(() {
-                  jk = value.toString();
+                  jkController.text = value.toString();
                 });
               },
             ),
@@ -158,19 +160,21 @@ class _formMhs extends State<formMhs> {
                     noTelpController.text.isEmpty
                         ? _validateNoTelp = true
                         : _validateNoTelp = false;
-                    jk == null ? _validateJk = true : _validateJk = false;
+                    jkController.text.isEmpty
+                        ? _validateJk = true
+                        : _validateJk = false;
                   });
                   if (_validateNim == false &&
                       _validateNama == false &&
                       _validateAlamat == false &&
-                      _validateJk == false &&
-                      _validateNoTelp == false) {
+                      _validateNoTelp == false &&
+                      _validateJk == false) {
                     var _mhs = Mahasiswa();
                     _mhs.nim = nimController.text;
                     _mhs.nama = namaController.text;
                     _mhs.alamat = alamatController.text;
                     _mhs.notelp = noTelpController.text;
-                    _mhs.jk = jk;
+                    _mhs.jk = jkController.text;
                     var result = await _mhsService.SaveMhs(_mhs);
                     Navigator.pop(context, result);
                   }
@@ -190,6 +194,7 @@ class _formMhs extends State<formMhs> {
                   namaController.text = '';
                   alamatController.text = '';
                   noTelpController.text = '';
+                  jkController.text = '';
                 },
                 child: const Text('Clear Data'),
               ),

@@ -27,6 +27,7 @@ class _ListMahasiswaPageState extends State<ListMahasiswaPage> {
         mhsModel.nama = mhs['nama'];
         mhsModel.alamat = mhs['alamat'];
         mhsModel.notelp = mhs['notelp'];
+        mhsModel.jk = mhs['jk'];
         _list.add(mhsModel);
       });
     });
