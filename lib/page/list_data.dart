@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobile_uas2/MyHeaderDrawer.dart';
+import 'package:flutter_mobile_uas2/page/beranda.dart';
 import 'package:flutter_mobile_uas2/models/mahasiswa.dart';
 import 'package:flutter_mobile_uas2/page/edit_form.dart';
 import 'package:flutter_mobile_uas2/page/form.dart';
@@ -98,8 +100,14 @@ class _ListMahasiswaPageState extends State<ListMahasiswaPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(
-          child: Text("Data Mahasiswa"),
+        backgroundColor: Colors.blue,
+        title: const Text("Polinema"),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => Beranda()));
+          },
+          icon: Icon(Icons.arrow_back),
         ),
       ),
       body: ListView.builder(

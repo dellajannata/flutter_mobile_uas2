@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_mobile_uas2/page/beranda.dart';
 import 'package:flutter_mobile_uas2/models/mahasiswa.dart';
+import 'package:flutter_mobile_uas2/page/list_data.dart';
 import 'package:flutter_mobile_uas2/service/mahasiswaSevice.dart';
 
 class formMhs extends StatefulWidget {
@@ -27,7 +29,15 @@ class _formMhs extends State<formMhs> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Form Mahasiswa"),
+        backgroundColor: Colors.blue,
+        title: const Text("Polinema"),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => ListMahasiswaPage()));
+          },
+          icon: Icon(Icons.arrow_back),
+        ),
       ),
       body: ListView(
         padding: EdgeInsets.all(16.0),
@@ -39,7 +49,7 @@ class _formMhs extends State<formMhs> {
                 fontSize: 20,
                 color: Colors.black,
                 fontWeight: FontWeight.bold,
-                fontFamily: " CabalBold"),
+                fontFamily: "CabalBold"),
           ),
           SizedBox(
             height: 30,
@@ -179,7 +189,7 @@ class _formMhs extends State<formMhs> {
                     Navigator.pop(context, result);
                   }
                 },
-                child: const Text('Save Data'),
+                child: const Text('            Save Data             '),
               ),
               const SizedBox(
                 width: 20,
@@ -196,11 +206,18 @@ class _formMhs extends State<formMhs> {
                   noTelpController.text = '';
                   jkController.text = '';
                 },
-                child: const Text('Clear Data'),
+                child: const Text('            Clear Data             '),
               ),
             ],
           ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.arrow_back),
+        onPressed: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => ListMahasiswaPage()));
+        },
       ),
     );
   }

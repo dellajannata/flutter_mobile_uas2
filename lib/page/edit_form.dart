@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobile_uas2/models/mahasiswa.dart';
+import 'package:flutter_mobile_uas2/page/list_data.dart';
 import 'package:flutter_mobile_uas2/service/mahasiswaSevice.dart';
 
 class EditMahasiswa extends StatefulWidget {
@@ -56,7 +57,7 @@ class _EditMahasiswaState extends State<EditMahasiswa> {
                     fontWeight: FontWeight.bold,
                     fontFamily: " CabalBold"),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               TextField(
@@ -108,9 +109,9 @@ class _EditMahasiswaState extends State<EditMahasiswa> {
                   )),
               DropdownButton(
                 isExpanded: true,
-                underline: SizedBox(),
-                hint: Text('Jenis Kelamin'),
-                items: [
+                underline: const SizedBox(),
+                hint: const Text('Jenis Kelamin'),
+                items: const [
                   DropdownMenuItem(
                     child: Text('Laki - Laki'),
                     value: "Laki - Laki",
@@ -171,7 +172,7 @@ class _EditMahasiswaState extends State<EditMahasiswa> {
                         Navigator.pop(context, result);
                       }
                     },
-                    child: const Text('Update Details'),
+                    child: const Text('          Update  Data           '),
                   ),
                   const SizedBox(
                     width: 10.0,
@@ -188,12 +189,21 @@ class _EditMahasiswaState extends State<EditMahasiswa> {
                         _mahasiswaNoTelpController.text = '';
                         _mahasiswaJkController.text = '';
                       },
-                      child: const Text('Clear Details'))
+                      child: const Text('          Clear Data           '))
                 ],
               )
             ],
           ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.arrow_back),
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const ListMahasiswaPage()));
+        },
       ),
     );
   }

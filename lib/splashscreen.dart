@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobile_uas2/page/beranda.dart';
 import 'dart:async';
 
 import 'package:flutter_mobile_uas2/page/list_data.dart';
@@ -15,8 +16,8 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Timer(const Duration(seconds: 3), () {
-      Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (_) => ListMahasiswaPage()));
+      Navigator.of(context)
+          .pushReplacement(MaterialPageRoute(builder: (_) => Beranda()));
     });
   }
 
