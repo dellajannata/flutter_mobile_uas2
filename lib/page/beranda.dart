@@ -110,6 +110,17 @@ class _BerandaState extends State<Beranda> {
                         ),
                       )),
                       const SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text("Graha Politeknik Negeri Malang",
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.bold)),
+                        ],
+                      ),
+                      const SizedBox(
                         height: 30,
                       ),
                       ClipRRect(
@@ -128,6 +139,17 @@ class _BerandaState extends State<Beranda> {
                           ),
                         ),
                       )),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text("Gedung Sipil",
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.bold)),
+                        ],
+                      ),
                       const SizedBox(
                         height: 30,
                       ),
