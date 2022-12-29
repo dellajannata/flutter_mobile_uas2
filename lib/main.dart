@@ -7,7 +7,6 @@ void main() {
     debugShowCheckedModeBanner: false,
     routes: {
       '/': (context) => SplashScreen(),
-      '/list': (context) => ListMahasiswaPage(),
     },
   ));
 }

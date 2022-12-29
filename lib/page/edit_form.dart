@@ -61,6 +61,8 @@ class _EditMahasiswaState extends State<EditMahasiswa> {
               ),
               TextField(
                   controller: _mahasiswaNimController,
+                  keyboardType: TextInputType.number,
+                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                   decoration: InputDecoration(
                     border: const OutlineInputBorder(),
                     hintText: 'Masukkan NIM Anda',
@@ -169,7 +171,7 @@ class _EditMahasiswaState extends State<EditMahasiswa> {
                         Navigator.pop(context, result);
                       }
                     },
-                    child: const Text('Update'),
+                    child: const Text('Update Details'),
                   ),
                   const SizedBox(
                     width: 10.0,
