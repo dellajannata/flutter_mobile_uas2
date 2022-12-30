@@ -151,62 +151,75 @@ class _formMhs extends State<formMhs> {
           ),
           Row(
             children: [
-              TextButton(
-                style: TextButton.styleFrom(
-                  primary: Colors.white,
-                  backgroundColor: Colors.green,
+              SizedBox(
+                width: 6.0,
+              ),
+              SizedBox(
+                height: 40,
+                width: MediaQuery.of(context).size.width / 2 - 35,
+                child: TextButton(
+                  style: TextButton.styleFrom(
+                    primary: Colors.white,
+                    backgroundColor: Colors.green,
+                  ),
+                  // biar hapus semua value yang udah di isi
+                  onPressed: () async {
+                    setState(() {
+                      nimController.text.isEmpty
+                          ? _validateNim = true
+                          : _validateNim = false;
+                      namaController.text.isEmpty
+                          ? _validateNama = true
+                          : _validateNama = false;
+                      alamatController.text.isEmpty
+                          ? _validateAlamat = true
+                          : _validateAlamat = false;
+                      noTelpController.text.isEmpty
+                          ? _validateNoTelp = true
+                          : _validateNoTelp = false;
+                      jkController.text.isEmpty
+                          ? _validateJk = true
+                          : _validateJk = false;
+                    });
+                    if (_validateNim == false &&
+                        _validateNama == false &&
+                        _validateAlamat == false &&
+                        _validateNoTelp == false &&
+                        _validateJk == false) {
+                      var _mhs = Mahasiswa();
+                      _mhs.nim = nimController.text;
+                      _mhs.nama = namaController.text;
+                      _mhs.alamat = alamatController.text;
+                      _mhs.notelp = noTelpController.text;
+                      _mhs.jk = jkController.text;
+                      var result = await _mhsService.SaveMhs(_mhs);
+                      Navigator.pop(context, result);
+                    }
+                  },
+                  child: Text('Save Data'),
                 ),
-                onPressed: () async {
-                  setState(() {
-                    nimController.text.isEmpty
-                        ? _validateNim = true
-                        : _validateNim = false;
-                    namaController.text.isEmpty
-                        ? _validateNama = true
-                        : _validateNama = false;
-                    alamatController.text.isEmpty
-                        ? _validateAlamat = true
-                        : _validateAlamat = false;
-                    noTelpController.text.isEmpty
-                        ? _validateNoTelp = true
-                        : _validateNoTelp = false;
-                    jkController.text.isEmpty
-                        ? _validateJk = true
-                        : _validateJk = false;
-                  });
-                  if (_validateNim == false &&
-                      _validateNama == false &&
-                      _validateAlamat == false &&
-                      _validateNoTelp == false &&
-                      _validateJk == false) {
-                    var _mhs = Mahasiswa();
-                    _mhs.nim = nimController.text;
-                    _mhs.nama = namaController.text;
-                    _mhs.alamat = alamatController.text;
-                    _mhs.notelp = noTelpController.text;
-                    _mhs.jk = jkController.text;
-                    var result = await _mhsService.SaveMhs(_mhs);
-                    Navigator.pop(context, result);
-                  }
-                },
-                child: const Text('            Save Data             '),
               ),
               const SizedBox(
-                width: 20,
+                width: 26,
               ),
-              TextButton(
-                style: TextButton.styleFrom(
-                  primary: Colors.white,
-                  backgroundColor: Colors.red,
+              SizedBox(
+                height: 40,
+                width: MediaQuery.of(context).size.width / 2 - 35,
+                child: TextButton(
+                  style: TextButton.styleFrom(
+                    primary: Colors.white,
+                    backgroundColor: Colors.red,
+                  ),
+                  // biar hapus semua value yang udah di isi
+                  onPressed: () {
+                    nimController.text = '';
+                    namaController.text = '';
+                    alamatController.text = '';
+                    noTelpController.text = '';
+                    jkController.text = '';
+                  },
+                  child: Text('Cancel'),
                 ),
-                onPressed: () {
-                  nimController.text = '';
-                  namaController.text = '';
-                  alamatController.text = '';
-                  noTelpController.text = '';
-                  jkController.text = '';
-                },
-                child: const Text('            Clear Data             '),
               ),
             ],
           ),

@@ -132,64 +132,78 @@ class _EditMahasiswaState extends State<EditMahasiswa> {
               ),
               Row(
                 children: [
-                  TextButton(
-                    style: TextButton.styleFrom(
+                  SizedBox(
+                    width: 6.0,
+                  ),
+                  SizedBox(
+                    height: 40,
+                    width: MediaQuery.of(context).size.width / 2 - 35,
+                    child: TextButton(
+                      style: TextButton.styleFrom(
                         primary: Colors.white,
-                        backgroundColor: Colors.teal,
-                        textStyle: const TextStyle(fontSize: 15)),
-                    onPressed: () async {
-                      setState(() {
-                        _mahasiswaNimController.text.isEmpty
-                            ? _validateNim = true
-                            : _validateNim = false;
-                        _mahasiswaNamaController.text.isEmpty
-                            ? _validateNama = true
-                            : _validateNama = false;
-                        _mahasiswaAlamatController.text.isEmpty
-                            ? _validateAlamat = true
-                            : _validateAlamat = false;
-                        _mahasiswaNoTelpController.text.isEmpty
-                            ? _validateNoTelp = true
-                            : _validateNoTelp = false;
-                        _mahasiswaJkController.text.isEmpty
-                            ? _validateJk = true
-                            : _validateJk = false;
-                      });
-                      if (_validateNim == false &&
-                          _validateNama == false &&
-                          _validateAlamat == false &&
-                          _validateNoTelp == false &&
-                          _validateJk == false) {
-                        var _mhs = Mahasiswa();
-                        _mhs.id = widget.mahasiswa.id;
-                        _mhs.nim = _mahasiswaNimController.text;
-                        _mhs.nama = _mahasiswaNamaController.text;
-                        _mhs.alamat = _mahasiswaAlamatController.text;
-                        _mhs.notelp = _mahasiswaNoTelpController.text;
-                        _mhs.jk = _mahasiswaJkController.text;
-                        var result =
-                            await _mahasiswaService.UpdateMahasiswa(_mhs);
-                        Navigator.pop(context, result);
-                      }
-                    },
-                    child: const Text('          Update  Data           '),
+                        backgroundColor: Colors.green,
+                      ),
+                      // biar hapus semua value yang udah di isi
+                      onPressed: () async {
+                        setState(() {
+                          _mahasiswaNimController.text.isEmpty
+                              ? _validateNim = true
+                              : _validateNim = false;
+                          _mahasiswaNamaController.text.isEmpty
+                              ? _validateNama = true
+                              : _validateNama = false;
+                          _mahasiswaAlamatController.text.isEmpty
+                              ? _validateAlamat = true
+                              : _validateAlamat = false;
+                          _mahasiswaNoTelpController.text.isEmpty
+                              ? _validateNoTelp = true
+                              : _validateNoTelp = false;
+                          _mahasiswaJkController.text.isEmpty
+                              ? _validateJk = true
+                              : _validateJk = false;
+                        });
+                        if (_validateNim == false &&
+                            _validateNama == false &&
+                            _validateAlamat == false &&
+                            _validateNoTelp == false &&
+                            _validateJk == false) {
+                          var _mhs = Mahasiswa();
+                          _mhs.id = widget.mahasiswa.id;
+                          _mhs.nim = _mahasiswaNimController.text;
+                          _mhs.nama = _mahasiswaNamaController.text;
+                          _mhs.alamat = _mahasiswaAlamatController.text;
+                          _mhs.notelp = _mahasiswaNoTelpController.text;
+                          _mhs.jk = _mahasiswaJkController.text;
+                          var result =
+                              await _mahasiswaService.UpdateMahasiswa(_mhs);
+                          Navigator.pop(context, result);
+                        }
+                      },
+                      child: Text('Update Data'),
+                    ),
                   ),
                   const SizedBox(
                     width: 10.0,
                   ),
-                  TextButton(
+                  SizedBox(
+                    height: 40,
+                    width: MediaQuery.of(context).size.width / 2 - 35,
+                    child: TextButton(
                       style: TextButton.styleFrom(
-                          primary: Colors.white,
-                          backgroundColor: Colors.red,
-                          textStyle: const TextStyle(fontSize: 15)),
+                        primary: Colors.white,
+                        backgroundColor: Colors.red,
+                      ),
+                      // biar hapus semua value yang udah di isi
                       onPressed: () {
-                        _mahasiswaNamaController.text = '';
                         _mahasiswaNimController.text = '';
+                        _mahasiswaNamaController.text = '';
                         _mahasiswaAlamatController.text = '';
                         _mahasiswaNoTelpController.text = '';
                         _mahasiswaJkController.text = '';
                       },
-                      child: const Text('          Clear Data           '))
+                      child: Text('Clear Data'),
+                    ),
+                  ),
                 ],
               )
             ],
